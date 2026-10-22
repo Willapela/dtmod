@@ -53,8 +53,45 @@ as opções:
 Na opção (d) o APK precisa ser refeito com a porta nova:
 
 ```bash
+cd apk-build/.work/dtunnel-mod
 ./make_mod.sh HOST 38443
 ```
+
+## Preparar o APK modificado (opcional)
+
+O build do APK é uma etapa separada do painel. Faça-a em um **PC Linux de
+confiança**, não no servidor público do painel. O script abaixo baixa uma
+revisão fixada do pacote `DTUNNEL-MOD` para `apk-build/.work/` e valida o
+SHA-256; o pacote e os APKs gerados ficam ignorados pelo Git.
+
+```bash
+./apk-build/fetch-package.sh
+cd apk-build/.work/dtunnel-mod
+./install_deps.sh
+```
+
+Instale o SDK Android Build Tools conforme a saída do verificador. Depois,
+sincronize a chave pública de assinatura e a CA do seu servidor, e gere o APK
+com o mesmo host e porta gRPC configurados no servidor:
+
+```bash
+./sync_keys.sh SEU_HOST USUARIO_SSH
+./make_mod.sh SEU_HOST PORTA_GRPC
+```
+
+O APK final será salvo em `dist/dt_patched_signed.apk`. A sincronização usa
+SSH e lê arquivos do servidor; execute-a apenas em um computador e conta de
+usuário confiáveis. Não copie `server_reply.key` para o computador nem publique
+chaves, keystore ou APKs dentro do repositório.
+
+**Aviso de segurança:** o pacote de mod pode desativar verificações de
+assinatura e de certificado TLS dentro do app. Isso reduz a proteção do
+cliente; use apenas se você confia no APK e controla o servidor de destino.
+O pacote também contém uma keystore de assinatura distribuída com ele, portanto
+ela não deve ser tratada como uma identidade exclusiva sua.
+
+Para baixar novamente, remova somente a pasta ignorada `apk-build/.work/` e
+execute `./apk-build/fetch-package.sh` outra vez.
 
 O `start.sh` gerado detecta o `authbind` e o usa automaticamente.
 
