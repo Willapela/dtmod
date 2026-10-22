@@ -4,10 +4,11 @@
   const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
 
   const TITLES = {
+    home: 'Home',
     configs: 'Conexões',
     categories: 'Categorias',
     cdns: 'Endpoints',
-    app_configs: 'App Config',
+    app_configs: 'Aplicativo',
     webview: 'WebView HTML',
     texts: 'Textos',
     logs: 'Logs',
@@ -15,10 +16,11 @@
   };
 
   const SUBTITLES = {
+    home: 'Resumo do servidor e atalhos do painel.',
     configs: 'Gerencie as conexões entregues ao aplicativo.',
     categories: 'Organize as conexões em grupos visíveis no app.',
     cdns: 'Cadastre os domínios/CDNs usados como endpoints.',
-    app_configs: 'Ajuste as chaves de configuração do aplicativo.',
+    app_configs: 'Ajuste as configurações e a aparência do aplicativo.',
     webview: 'Cole o HTML que o app mostra no WebView (página / home).',
     texts: 'Edite os textos exibidos na interface do app.',
     logs: 'Acompanhe o log do servidor gRPC em tempo real.',
@@ -75,7 +77,7 @@
   const ICON_EMPTY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>';
   const ICON_EYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.5"/></svg>';
 
-  let current = 'configs';
+  let current = 'home';
   let rows = [];
   let dirty = false;
   let schema = null;
@@ -225,14 +227,20 @@
       const active = !!(s.grpc && String(s.grpc).trim());
       el.innerHTML = `<span class="dot ${active ? 'ok' : 'err'}"></span><span>${active ? 'gRPC ativo' : 'gRPC inativo'}</span>`;
       el.title = s.dataDir || '';
+      $('#homeStatusText').textContent = active ? 'Servidor gRPC ativo' : 'Servidor gRPC inativo';
+      $('#homeStatusDot').className = `dot ${active ? 'ok' : 'err'}`;
     } catch (e) {
       el.innerHTML = `<span class="dot err"></span><span>${esc(e.message)}</span>`;
       el.title = '';
+      $('#homeStatusText').textContent = 'Não foi possível consultar o servidor';
+      $('#homeStatusDot').className = 'dot err';
     }
   }
 
   async function load() {
+    $('#homeDashboard').classList.add('hidden');
     if (current === 'apk-build') return loadApkBuild();
+    if (current === 'home') return loadHome();
     $('#apkBuilder').classList.add('hidden');
     $('#editor').classList.remove('hidden');
     if (current === 'logs') return loadLogs();
@@ -266,6 +274,23 @@
       $('#count').textContent = `${(lines || []).length} linhas`;
     } catch (e) {
       toast('Erro ao carregar logs: ' + e.message, 'err');
+    }
+  }
+
+  async function loadHome() {
+    $('#homeDashboard').classList.remove('hidden');
+    $('#editor').classList.add('hidden');
+    $('#logs').classList.add('hidden');
+    $('#apkBuilder').classList.add('hidden');
+    $('#count').textContent = '';
+    try {
+      const [configs, cats] = await Promise.all([api('/api/configs'), api('/api/categories')]);
+      $('#homeConfigCount').textContent = (configs.data || []).length.toLocaleString('pt-BR');
+      $('#homeCategoryCount').textContent = (cats.data || []).length.toLocaleString('pt-BR');
+    } catch (e) {
+      $('#homeConfigCount').textContent = '—';
+      $('#homeCategoryCount').textContent = '—';
+      toast('Não foi possível carregar o resumo: ' + e.message, 'err');
     }
   }
 
@@ -1056,24 +1081,50 @@
     }
   }
 
+  function applyTheme(theme) {
+    const value = theme === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', value);
+    const label = $('#themeToggle span');
+    if (label) label.textContent = value === 'dark' ? 'Modo claro' : 'Modo escuro';
+    $('#themeToggle').setAttribute('aria-pressed', value === 'dark' ? 'true' : 'false');
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = value === 'dark' ? '#0b0e12' : '#f1f3f5';
+  }
+
+  function toggleTheme() {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('dtmod-theme', next); } catch (_) {}
+    applyTheme(next);
+  }
+
+  function setSidebarOpen(open) {
+    $('#sidebar').classList.toggle('mobile-open', open);
+    $('#navBackdrop').classList.toggle('show', open);
+    $('#navToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.classList.toggle('nav-open', open);
+  }
+
   function selectTab(file) {
     current = file;
     $$('#tabs .tab').forEach((t) => t.classList.toggle('active', t.dataset.file === file));
+    setSidebarOpen(false);
     $('#pageTitle').textContent = TITLES[file] || file;
     $('#pageSub').textContent = SUBTITLES[file] || '';
     $('#search').value = '';
     const addBtn = $('#add');
-    if (addBtn) addBtn.style.display = (file === 'webview' || file === 'logs') ? 'none' : '';
+    if (addBtn) addBtn.style.display = (file === 'webview' || file === 'logs' || file === 'home' || file === 'apk-build') ? 'none' : '';
+    const isHome = file === 'home';
     const isBuild = file === 'apk-build';
-    $('#toolbar').classList.toggle('hidden', isBuild);
-    $('#search').disabled = file === 'logs' || isBuild;
+    const isSpecial = isHome || isBuild;
+    $('#toolbar').classList.toggle('hidden', isSpecial);
+    $('#search').disabled = file === 'logs' || isSpecial;
     const isConfigs = file === 'configs';
     const isLogs = file === 'logs';
     $('#export').classList.toggle('hidden', !isConfigs);
     $('#import').classList.toggle('hidden', !isConfigs);
-    $('#add').classList.toggle('hidden', isLogs || isBuild);
-    $('#save').classList.toggle('hidden', isLogs || isBuild);
-    $('#restore').classList.toggle('hidden', isLogs || isBuild);
+    $('#add').classList.toggle('hidden', isLogs || isSpecial);
+    $('#save').classList.toggle('hidden', isLogs || isSpecial);
+    $('#restore').classList.toggle('hidden', isLogs || isSpecial);
     load();
   }
 
@@ -1101,6 +1152,17 @@
     $$('#tabs .tab').forEach((t) =>
       t.addEventListener('click', () => selectTab(t.dataset.file))
     );
+    $('#navToggle').addEventListener('click', () => setSidebarOpen(!$('#sidebar').classList.contains('mobile-open')));
+    $('#navClose').addEventListener('click', () => setSidebarOpen(false));
+    $('#navBackdrop').addEventListener('click', () => setSidebarOpen(false));
+    $('#themeToggle').addEventListener('click', toggleTheme);
+    $('#homeDashboard').addEventListener('click', (ev) => {
+      const shortcut = ev.target.closest('[data-goto]');
+      if (shortcut) selectTab(shortcut.dataset.goto);
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 991) setSidebarOpen(false);
+    });
 
     $('#save').addEventListener('click', save);
     $('#export').addEventListener('click', exportJson);
@@ -1180,9 +1242,15 @@
   }
 
   async function boot() {
+    try {
+      const savedTheme = localStorage.getItem('dtmod-theme');
+      const systemTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      applyTheme(savedTheme || systemTheme);
+    }
+    catch (_) { applyTheme('light'); }
     bind();
     await Promise.all([loadSchema(), loadMeta()]);
-    selectTab('configs');
+    selectTab('home');
     loadStatus();
     setInterval(loadStatus, 15000);
   }
