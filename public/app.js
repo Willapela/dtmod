@@ -11,6 +11,7 @@
     webview: 'WebView HTML',
     texts: 'Textos',
     logs: 'Logs',
+    'apk-build': 'Build APK',
   };
 
   const SUBTITLES = {
@@ -21,6 +22,7 @@
     webview: 'Cole o HTML que o app mostra no WebView (página / home).',
     texts: 'Edite os textos exibidos na interface do app.',
     logs: 'Acompanhe o log do servidor gRPC em tempo real.',
+    'apk-build': 'Gere e baixe o APK configurado para este servidor.',
   };
 
   const PRIMARY = {
@@ -83,6 +85,7 @@
   let editIdx = null;
   let editorDraft = null;
   let editorIsNew = false;
+  let apkBuildPoll = null;
 
   function toast(msg, kind = '') {
     const t = $('#toast');
@@ -229,6 +232,9 @@
   }
 
   async function load() {
+    if (current === 'apk-build') return loadApkBuild();
+    $('#apkBuilder').classList.add('hidden');
+    $('#editor').classList.remove('hidden');
     if (current === 'logs') return loadLogs();
     $('#logs').classList.add('hidden');
     $('#editor').classList.remove('hidden');
@@ -260,6 +266,63 @@
       $('#count').textContent = `${(lines || []).length} linhas`;
     } catch (e) {
       toast('Erro ao carregar logs: ' + e.message, 'err');
+    }
+  }
+
+  function paintApkBuild(s) {
+    const host = $('#apkHost');
+    const selected = host.value;
+    host.innerHTML = (s.hosts || []).map((v) => `<option value="${esc(v)}">${esc(v)}</option>`).join('');
+    if ((s.hosts || []).includes(selected)) host.value = selected;
+    host.disabled = !s.hosts || !s.hosts.length || s.running;
+    $('#apkPort').value = s.port || '';
+    $('#apkBuildOutput').textContent = s.output || '';
+    $('#apkBuildOutput').scrollTop = $('#apkBuildOutput').scrollHeight;
+    $('#apkBuildButton').disabled = !!s.running || !s.hosts || !s.hosts.length;
+    $('#apkDownload').classList.toggle('hidden', !s.downloadReady);
+
+    let text = 'Pronto para gerar.';
+    if (s.configError) text = s.configError;
+    else if (s.running) text = `Build em andamento para ${s.host}:${s.targetPort}…`;
+    else if (s.ok) text = `Build concluído para ${s.host}:${s.targetPort}.`;
+    else if (s.error) text = `Build falhou: ${s.error}`;
+    else if (!s.packageReady) text = 'O pacote de build será baixado e validado ao iniciar.';
+    $('#apkBuildStatus').textContent = text;
+
+    if (apkBuildPoll) clearInterval(apkBuildPoll);
+    apkBuildPoll = s.running ? setInterval(() => {
+      if (current !== 'apk-build') { clearInterval(apkBuildPoll); apkBuildPoll = null; return; }
+      refreshApkBuildStatus();
+    }, 2000) : null;
+  }
+
+  async function refreshApkBuildStatus() {
+    try { paintApkBuild(await api('/api/apk-build')); }
+    catch (e) { $('#apkBuildStatus').textContent = 'Não foi possível consultar o build: ' + e.message; }
+  }
+
+  async function loadApkBuild() {
+    $('#editor').classList.add('hidden');
+    $('#logs').classList.add('hidden');
+    $('#apkBuilder').classList.remove('hidden');
+    await refreshApkBuildStatus();
+  }
+
+  async function startApkBuild(ev) {
+    ev.preventDefault();
+    const button = $('#apkBuildButton');
+    button.disabled = true;
+    try {
+      const result = await api('/api/apk-build', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ host: $('#apkHost').value, acknowledge: $('#apkAcknowledge').checked }),
+      });
+      toast(result.message || 'Build iniciado.', 'ok');
+      await refreshApkBuildStatus();
+    } catch (e) {
+      toast('Não foi possível iniciar: ' + e.message, 'err');
+      button.disabled = false;
     }
   }
 
@@ -1001,14 +1064,16 @@
     $('#search').value = '';
     const addBtn = $('#add');
     if (addBtn) addBtn.style.display = (file === 'webview' || file === 'logs') ? 'none' : '';
-    $('#search').disabled = file === 'logs';
+    const isBuild = file === 'apk-build';
+    $('#toolbar').classList.toggle('hidden', isBuild);
+    $('#search').disabled = file === 'logs' || isBuild;
     const isConfigs = file === 'configs';
     const isLogs = file === 'logs';
     $('#export').classList.toggle('hidden', !isConfigs);
     $('#import').classList.toggle('hidden', !isConfigs);
-    $('#add').classList.toggle('hidden', isLogs);
-    $('#save').classList.toggle('hidden', isLogs);
-    $('#restore').classList.toggle('hidden', isLogs);
+    $('#add').classList.toggle('hidden', isLogs || isBuild);
+    $('#save').classList.toggle('hidden', isLogs || isBuild);
+    $('#restore').classList.toggle('hidden', isLogs || isBuild);
     load();
   }
 
@@ -1053,6 +1118,7 @@
     $('#passClose').addEventListener('click', closePasswordModal);
     $('#passCancel').addEventListener('click', closePasswordModal);
     $('#passSave').addEventListener('click', savePassword);
+    $('#apkBuildForm').addEventListener('submit', startApkBuild);
 
     $('#modal').addEventListener('click', (ev) => {
       if (ev.target === $('#modal')) closeEditor();

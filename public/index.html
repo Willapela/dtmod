@@ -46,6 +46,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v16H5z"/><path d="M8 8l2 2-2 2M12 12h4M8 16h8"/></svg>
         <span>Logs</span>
       </button>
+      <button class="tab" data-file="apk-build">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v5h5M10 13h6M10 17h6"/></svg>
+        <span>Build APK</span>
+      </button>
     </nav>
 
     <div class="side-foot">
@@ -68,7 +72,7 @@
     </header>
 
     <main class="content">
-      <section class="toolbar">
+      <section class="toolbar" id="toolbar">
         <label class="search-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
           <input type="search" id="search" placeholder="Filtrar por nome, host, categoria…" autocomplete="off">
@@ -97,6 +101,29 @@
 
       <div id="editor"></div>
       <div id="logs" class="logs hidden"></div>
+      <section id="apkBuilder" class="apk-builder hidden" aria-live="polite">
+        <div class="wv-help">
+          <strong>Compilar APK para este servidor</strong>
+          <p>O APK será configurado para o host do certificado TLS e para a porta gRPC ativa. O primeiro build pode baixar o pacote fixado e leva alguns minutos.</p>
+        </div>
+        <form id="apkBuildForm" class="card apk-build-card">
+          <div class="form-grid">
+            <label class="fld"><span>Host permitido pelo certificado</span><select id="apkHost" required></select></label>
+            <label class="fld"><span>Porta gRPC do servidor</span><input id="apkPort" type="text" readonly></label>
+          </div>
+          <div class="apk-risk">
+            <strong>Aviso de segurança</strong>
+            <p>Este pacote altera verificações de assinatura e TLS do aplicativo e usa uma keystore distribuída publicamente. Use somente se você confia no APK e controla o servidor. O build será executado neste VPS.</p>
+            <label><input id="apkAcknowledge" type="checkbox" required> Entendi e quero iniciar o build neste servidor.</label>
+          </div>
+          <div class="apk-actions">
+            <button class="btn primary" id="apkBuildButton" type="submit">Gerar APK</button>
+            <a class="btn success hidden" id="apkDownload" href="/api/apk-build/download">Baixar APK</a>
+          </div>
+          <p id="apkBuildStatus" class="apk-status" role="status">Carregando configuração…</p>
+          <pre id="apkBuildOutput" class="apk-output" aria-label="Saída do build"></pre>
+        </form>
+      </section>
     </main>
   </div>
 </div>
