@@ -8,6 +8,7 @@ const path = require('path');
 const crypto = require('crypto');
 const express = require('express');
 const data = require('./data');
+const apkBuild = require('./apk-build');
 
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 const PANEL_PASSWORD = process.env.DT_PANEL_PASSWORD || 'dtunnel';
@@ -115,6 +116,11 @@ function startPanel(opts = {}) {
   app.get('/api/health', (req, res) => {
     res.json({ ok: true, dataDir: data.DATA_DIR });
   });
+
+  // Build do APK: todas as rotas ficam atrás da autenticação global do painel.
+  app.get('/api/apk-build', apkBuild.getStatus);
+  app.post('/api/apk-build', apkBuild.startBuild);
+  app.get('/api/apk-build/download', apkBuild.downloadApk);
 
   app.get('/api/auth/state', (req, res) => {
     const stored = readPanelAuth();
