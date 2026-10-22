@@ -263,7 +263,8 @@ function downloadApk(req, res) {
   if (!state.ok || !fs.existsSync(OUTPUT_FILE)) return res.status(404).json({ error: 'Não há APK concluído para baixar.' });
   res.setHeader('Cache-Control', 'no-store');
   res.type('application/vnd.android.package-archive');
-  return res.download(OUTPUT_FILE, 'dt_patched_signed.apk');
+  // O APK fica em .work; o send do Express ignora caminhos ocultos por padrão.
+  return res.download(OUTPUT_FILE, 'dt_patched_signed.apk', { dotfiles: 'allow' });
 }
 
 module.exports = { getStatus, startBuild, downloadApk };
