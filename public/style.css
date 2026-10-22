@@ -845,3 +845,198 @@ fieldset legend {
   .form-grid { grid-template-columns: 1fr; }
   .fld.chk { padding-top: 0; }
 }
+
+/* ── WebView HTML tab ── */
+.wv-help {
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.06));
+}
+.wv-help strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.wv-help p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.wv-card {
+  padding: 16px 18px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  background: var(--panel);
+  margin-bottom: 10px;
+}
+.wv-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.wv-head h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.wv-html {
+  width: 100%;
+  min-height: 180px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xs);
+  background: var(--bg-soft);
+  color: var(--text);
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.55;
+  resize: vertical;
+  outline: none;
+}
+.wv-html:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.wv-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+.wv-switch input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* ── Modal de conexão (estilo painel mod) ── */
+.modal-box.modal-config {
+  max-width: 720px;
+  max-height: 92vh;
+}
+
+.modal-config .modal-head {
+  padding: 16px 20px;
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.08), transparent);
+}
+
+.modal-config .modal-body {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mode-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--panel-2);
+}
+
+.mode-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mode-label > span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mode-label select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xs);
+  background: var(--bg-soft);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+.mode-label select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.mode-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.modal-config fieldset {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px 16px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.modal-config fieldset legend {
+  padding: 0 10px;
+  color: var(--accent-hover);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.modal-config .form-grid {
+  gap: 12px;
+}
+
+.modal-config .fld > span {
+  font-size: 11px;
+}
+
+.modal-config .fld input,
+.modal-config .fld select,
+.modal-config .fld textarea {
+  padding: 11px 12px;
+  font-size: 13.5px;
+}
+
+.modal-config .payload-fld textarea {
+  min-height: 140px;
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.5;
+  background: #0a0e16;
+}
+
+.modal-config .modal-foot {
+  padding: 14px 20px;
+  gap: 12px;
+}
+
+.modal-config .modal-foot .btn.primary {
+  min-width: 160px;
+}
+
+@media (max-width: 640px) {
+  .modal-box.modal-config {
+    max-width: 100%;
+    max-height: 96vh;
+    border-radius: 16px 16px 0 0;
+  }
+}

@@ -8,6 +8,7 @@
     categories: 'Categorias',
     cdns: 'Endpoints',
     app_configs: 'App Config',
+    webview: 'WebView HTML',
     texts: 'Textos',
     logs: 'Logs',
   };
@@ -17,6 +18,7 @@
     categories: 'Organize as conexões em grupos visíveis no app.',
     cdns: 'Cadastre os domínios/CDNs usados como endpoints.',
     app_configs: 'Ajuste as chaves de configuração do aplicativo.',
+    webview: 'Cole o HTML que o app mostra no WebView (página / home).',
     texts: 'Edite os textos exibidos na interface do app.',
     logs: 'Acompanhe o log do servidor gRPC em tempo real.',
   };
@@ -36,6 +38,34 @@
     app_configs: 'type',
     texts: 'text',
   };
+
+  const WEBVIEW_KEYS = [
+    'APP_LAYOUT_WEBVIEW_ENABLED',
+    'APP_WEB_LAYOUT_ENABLED',
+    'APP_WEB_VIEW',
+    'APP_WEB_HOME_CONTENT',
+    'APP_WEB_PAGE_CONTENT',
+  ];
+
+  const WEBVIEW_LABELS = {
+    APP_LAYOUT_WEBVIEW_ENABLED: 'Ativar layout WebView',
+    APP_WEB_LAYOUT_ENABLED: 'Ativar layout Web',
+    APP_WEB_VIEW: 'HTML principal (WebView)',
+    APP_WEB_HOME_CONTENT: 'HTML da tela inicial (Home)',
+    APP_WEB_PAGE_CONTENT: 'HTML de página interna',
+  };
+
+  function isWebViewKey(name) {
+    const n = String(name || '').toUpperCase();
+    return WEBVIEW_KEYS.includes(n) || n.includes('WEB_VIEW') || n.includes('WEBVIEW') || n.includes('WEB_HOME') || n.includes('WEB_PAGE') || n.includes('WEB_LAYOUT');
+  }
+
+  function apiFile() {
+    // WebView edita o mesmo arquivo app_configs.json
+    return current === 'webview' ? 'app_configs' : current;
+  }
+
+
 
   const ICON_EDIT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 10-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>';
   const ICON_TRASH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/><path d="M10 11v5M14 11v5"/></svg>';
@@ -174,6 +204,12 @@
   }
 
   function updateCount() {
+    if (current === 'webview') {
+      const n = rows.filter((r) => isWebViewKey(r.name)).length;
+      const suffix = dirty ? ' • não salvo' : '';
+      $('#count').textContent = `${n} campos WebView${suffix}`;
+      return;
+    }
     const list = filtered();
     const suffix = dirty ? ' • não salvo' : '';
     $('#count').textContent = `${list.length} de ${rows.length} itens${suffix}`;
@@ -202,7 +238,7 @@
         if (res[0].status === 'fulfilled') categories = res[0].value.data || [];
         if (res[1].status === 'fulfilled') cdns = res[1].value.data || [];
       }
-      const { data } = await api(`/api/${current}`);
+      const { data } = await api(`/api/${apiFile()}`);
       rows = data;
       dirty = false;
       render();
@@ -240,6 +276,7 @@
     $('#logs').classList.add('hidden');
     $('#editor').classList.remove('hidden');
     if (current === 'configs') renderConfigs();
+    else if (current === 'webview') renderWebView();
     else renderGeneric();
   }
 
@@ -283,6 +320,80 @@
         </article>`;
       })
       .join('');
+  }
+
+
+  function renderWebView() {
+    updateCount();
+    const items = rows.filter((r) => isWebViewKey(r.name));
+    // ensure core keys exist in the full rows list for saving
+    const have = new Set(rows.map((r) => r.name));
+    for (const k of WEBVIEW_KEYS) {
+      if (!have.has(k)) {
+        const type = k.includes('ENABLED') ? 'BOOLEAN' : 'HTML';
+        rows.push({ name: k, type, value: type === 'BOOLEAN' ? false : '' });
+        dirty = true;
+      }
+    }
+    const list = rows.filter((r) => isWebViewKey(r.name));
+
+    if (!list.length) {
+      $('#editor').innerHTML = emptyState('Nenhum item de WebView', 'Clique em + Novo ou Salvar para criar os campos padrão.');
+      return;
+    }
+
+    $('#editor').innerHTML = `
+      <div class="wv-help">
+        <strong>WebView HTML</strong>
+        <p>Ative o layout e cole o HTML abaixo. Depois clique em <b>Salvar</b>. O app atualiza na próxima abertura.</p>
+      </div>
+      ${list.map((row) => {
+        const idx = rows.indexOf(row);
+        const label = WEBVIEW_LABELS[row.name] || row.name;
+        const isBool = String(row.type).toUpperCase() === 'BOOLEAN' || String(row.name).includes('ENABLED');
+        const val = row.value === null || row.value === undefined ? '' : row.value;
+        if (isBool) {
+          const checked = val === true || val === 'true' || val === 'True' || val === 1 || val === '1';
+          return `<article class="card wv-card" data-idx="${idx}">
+            <div class="wv-head">
+              <h3>${esc(label)}</h3>
+              <span class="chip">${esc(row.name)}</span>
+            </div>
+            <label class="wv-switch">
+              <input type="checkbox" data-wv-bool="${idx}" ${checked ? 'checked' : ''}>
+              <span>${checked ? 'Ativado' : 'Desativado'}</span>
+            </label>
+          </article>`;
+        }
+        return `<article class="card wv-card" data-idx="${idx}">
+          <div class="wv-head">
+            <h3>${esc(label)}</h3>
+            <span class="chip">${esc(row.name)}</span>
+          </div>
+          <textarea class="wv-html" data-wv-html="${idx}" rows="12" placeholder="Cole seu HTML aqui...">${esc(val)}</textarea>
+        </article>`;
+      }).join('')}
+    `;
+
+    // bind
+    $$('[data-wv-bool]').forEach((el) => {
+      el.addEventListener('change', () => {
+        const i = Number(el.getAttribute('data-wv-bool'));
+        rows[i].value = el.checked;
+        rows[i].type = 'BOOLEAN';
+        dirty = true;
+        const span = el.parentElement.querySelector('span');
+        if (span) span.textContent = el.checked ? 'Ativado' : 'Desativado';
+      });
+    });
+    $$('[data-wv-html]').forEach((el) => {
+      el.addEventListener('input', () => {
+        const i = Number(el.getAttribute('data-wv-html'));
+        rows[i].value = el.value;
+        rows[i].type = 'HTML';
+        dirty = true;
+      });
+    });
   }
 
   function renderGeneric() {
@@ -354,7 +465,7 @@
         if (!confirm('Você removeu todos os itens. Confirma apagar tudo?')) return false;
         body.force = true;
       }
-      const r = await api(`/api/${current}`, {
+      const r = await api(`/api/${apiFile()}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -485,7 +596,9 @@
     }
 
     if (ft === 'textarea') {
-      return `<label class="fld wide"><span>${esc(f.l)}</span><textarea id="${id}" data-k="${f.k}" rows="3" placeholder="${esc(f.h || '')}">${esc(v ?? '')}</textarea></label>`;
+      const rows = (f.k === 'payload' || f.k === 'config_v2ray' || f.k === 'config_payload') ? 8 : 4;
+      const cls = (f.k === 'payload' || f.k === 'config_v2ray') ? 'fld wide payload-fld' : 'fld wide';
+      return `<label class="${cls}"><span>${esc(f.l)}</span><textarea id="${id}" data-k="${f.k}" rows="${rows}" placeholder="${esc(f.h || '')}">${esc(v ?? '')}</textarea></label>`;
     }
 
     if (ft === 'dns') {
@@ -587,17 +700,24 @@
       .join('');
 
     $('#modal').innerHTML = `
-    <div class="modal-box">
+    <div class="modal-box modal-config">
       <div class="modal-head">
         <div class="modal-title">
           <h2>${editorIsNew ? 'Nova conexão' : 'Editar conexão'}</h2>
-          <small>${esc(def ? def.hint : 'modo de conexão')}</small>
+          <small>${esc(def ? def.hint : 'Configure os dados da conexão')}</small>
         </div>
-        <select id="fMode" aria-label="Modo de conexão">${modes}</select>
         <button class="icon-btn" id="mClose" type="button" aria-label="Fechar">✕</button>
       </div>
-      ${def ? `<div class="modal-hint">${esc(def.hint)}</div>` : ''}
-      <div class="modal-body">${body || '<p class="muted">Nenhum campo disponível para este modo.</p>'}</div>
+      <div class="modal-body">
+        <div class="mode-bar">
+          <label class="mode-label">
+            <span>Tipo de conexão</span>
+            <select id="fMode" aria-label="Modo de conexão">${modes}</select>
+          </label>
+          ${def ? `<p class="mode-hint">${esc(def.hint)}</p>` : ''}
+        </div>
+        ${body || '<p class="muted">Nenhum campo disponível para este modo.</p>'}
+      </div>
       <div class="modal-foot">
         <button class="btn ghost" id="mCancel" type="button">Cancelar</button>
         <button class="btn primary" id="mSave" type="button">Salvar no servidor</button>
@@ -818,7 +938,7 @@
     if (current === 'logs') return;
     if (!confirm('Restaurar o backup (.bak) do arquivo atual?')) return;
     try {
-      const r = await api(`/api/${current}/restore`, { method: 'POST' });
+      const r = await api(`/api/${apiFile()}/restore`, { method: 'POST' });
       toast(`Restaurado: ${r.count} itens`, 'ok');
       load();
     } catch (e) {
@@ -879,6 +999,8 @@
     $('#pageTitle').textContent = TITLES[file] || file;
     $('#pageSub').textContent = SUBTITLES[file] || '';
     $('#search').value = '';
+    const addBtn = $('#add');
+    if (addBtn) addBtn.style.display = (file === 'webview' || file === 'logs') ? 'none' : '';
     $('#search').disabled = file === 'logs';
     const isConfigs = file === 'configs';
     const isLogs = file === 'logs';
