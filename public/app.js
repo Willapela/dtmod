@@ -4,27 +4,25 @@
   const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
 
   const TITLES = {
-    home: 'Home',
     configs: 'Conexões',
     categories: 'Categorias',
     cdns: 'Endpoints',
-    app_configs: 'Aplicativo',
+    app_configs: 'App Config',
     webview: 'WebView HTML',
+    apk: 'APK / Update',
     texts: 'Textos',
     logs: 'Logs',
-    'apk-build': 'Build APK',
   };
 
   const SUBTITLES = {
-    home: 'Resumo do servidor e atalhos do painel.',
     configs: 'Gerencie as conexões entregues ao aplicativo.',
     categories: 'Organize as conexões em grupos visíveis no app.',
     cdns: 'Cadastre os domínios/CDNs usados como endpoints.',
-    app_configs: 'Ajuste as configurações e a aparência do aplicativo.',
+    app_configs: 'Ajuste as chaves de configuração do aplicativo.',
     webview: 'Cole o HTML que o app mostra no WebView (página / home).',
+    apk: 'Versão do app, link de download e atualização forçada.',
     texts: 'Edite os textos exibidos na interface do app.',
     logs: 'Acompanhe o log do servidor gRPC em tempo real.',
-    'apk-build': 'Gere e baixe o APK configurado para este servidor.',
   };
 
   const PRIMARY = {
@@ -64,9 +62,35 @@
     return WEBVIEW_KEYS.includes(n) || n.includes('WEB_VIEW') || n.includes('WEBVIEW') || n.includes('WEB_HOME') || n.includes('WEB_PAGE') || n.includes('WEB_LAYOUT');
   }
 
+  const APK_KEYS = [
+    'APP_CURRENT_VERSION',
+    'APP_UPDATE_CURRENT_VERSION',
+    'APP_DOWNLOAD_URL',
+    'APP_UPDATE_DOWNLOAD_URL',
+    'APP_BTN_UPDATE_ENABLED',
+    'APP_NATIVE_ACTION_UPDATE_ENABLED',
+    'APP_UPDATE_LAST_SEEN_ENABLED',
+  ];
+
+  const APK_LABELS = {
+    APP_CURRENT_VERSION: 'Versão atual do app',
+    APP_UPDATE_CURRENT_VERSION: 'Versão mínima (obrigar update)',
+    APP_DOWNLOAD_URL: 'Link de download do APK',
+    APP_UPDATE_DOWNLOAD_URL: 'Link do APK na atualização',
+    APP_BTN_UPDATE_ENABLED: 'Botão de atualizar no app',
+    APP_NATIVE_ACTION_UPDATE_ENABLED: 'Ação nativa de update',
+    APP_UPDATE_LAST_SEEN_ENABLED: 'Lembrar última versão vista',
+  };
+
+  function isApkKey(name) {
+    const n = String(name || '').toUpperCase();
+    return APK_KEYS.includes(n) || n.includes('UPDATE') || n.includes('DOWNLOAD_URL') || n === 'APP_CURRENT_VERSION';
+  }
+
+
   function apiFile() {
     // WebView edita o mesmo arquivo app_configs.json
-    return current === 'webview' ? 'app_configs' : current;
+    return (current === 'webview' || current === 'apk') ? 'app_configs' : current;
   }
 
 
@@ -77,7 +101,7 @@
   const ICON_EMPTY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>';
   const ICON_EYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.5"/></svg>';
 
-  let current = 'home';
+  let current = 'configs';
   let rows = [];
   let dirty = false;
   let schema = null;
@@ -87,7 +111,6 @@
   let editIdx = null;
   let editorDraft = null;
   let editorIsNew = false;
-  let apkBuildPoll = null;
 
   function toast(msg, kind = '') {
     const t = $('#toast');
@@ -215,6 +238,12 @@
       $('#count').textContent = `${n} campos WebView${suffix}`;
       return;
     }
+    if (current === 'apk') {
+      const n = rows.filter((r) => isApkKey(r.name)).length;
+      const suffix = dirty ? ' • não salvo' : '';
+      $('#count').textContent = `${n} campos APK/Update${suffix}`;
+      return;
+    }
     const list = filtered();
     const suffix = dirty ? ' • não salvo' : '';
     $('#count').textContent = `${list.length} de ${rows.length} itens${suffix}`;
@@ -227,22 +256,13 @@
       const active = !!(s.grpc && String(s.grpc).trim());
       el.innerHTML = `<span class="dot ${active ? 'ok' : 'err'}"></span><span>${active ? 'gRPC ativo' : 'gRPC inativo'}</span>`;
       el.title = s.dataDir || '';
-      $('#homeStatusText').textContent = active ? 'Servidor gRPC ativo' : 'Servidor gRPC inativo';
-      $('#homeStatusDot').className = `dot ${active ? 'ok' : 'err'}`;
     } catch (e) {
       el.innerHTML = `<span class="dot err"></span><span>${esc(e.message)}</span>`;
       el.title = '';
-      $('#homeStatusText').textContent = 'Não foi possível consultar o servidor';
-      $('#homeStatusDot').className = 'dot err';
     }
   }
 
   async function load() {
-    $('#homeDashboard').classList.add('hidden');
-    if (current === 'apk-build') return loadApkBuild();
-    if (current === 'home') return loadHome();
-    $('#apkBuilder').classList.add('hidden');
-    $('#editor').classList.remove('hidden');
     if (current === 'logs') return loadLogs();
     $('#logs').classList.add('hidden');
     $('#editor').classList.remove('hidden');
@@ -277,80 +297,6 @@
     }
   }
 
-  async function loadHome() {
-    $('#homeDashboard').classList.remove('hidden');
-    $('#editor').classList.add('hidden');
-    $('#logs').classList.add('hidden');
-    $('#apkBuilder').classList.add('hidden');
-    $('#count').textContent = '';
-    try {
-      const [configs, cats] = await Promise.all([api('/api/configs'), api('/api/categories')]);
-      $('#homeConfigCount').textContent = (configs.data || []).length.toLocaleString('pt-BR');
-      $('#homeCategoryCount').textContent = (cats.data || []).length.toLocaleString('pt-BR');
-    } catch (e) {
-      $('#homeConfigCount').textContent = '—';
-      $('#homeCategoryCount').textContent = '—';
-      toast('Não foi possível carregar o resumo: ' + e.message, 'err');
-    }
-  }
-
-  function paintApkBuild(s) {
-    const host = $('#apkHost');
-    const selected = host.value;
-    host.innerHTML = (s.hosts || []).map((v) => `<option value="${esc(v)}">${esc(v)}</option>`).join('');
-    if ((s.hosts || []).includes(selected)) host.value = selected;
-    host.disabled = !s.hosts || !s.hosts.length || s.running;
-    $('#apkPort').value = s.port || '';
-    $('#apkBuildOutput').textContent = s.output || '';
-    $('#apkBuildOutput').scrollTop = $('#apkBuildOutput').scrollHeight;
-    $('#apkBuildButton').disabled = !!s.running || !s.hosts || !s.hosts.length;
-    $('#apkDownload').classList.toggle('hidden', !s.downloadReady);
-
-    let text = 'Pronto para gerar.';
-    if (s.configError) text = s.configError;
-    else if (s.running) text = `Build em andamento para ${s.host}:${s.targetPort}…`;
-    else if (s.ok) text = `Build concluído para ${s.host}:${s.targetPort}.`;
-    else if (s.error) text = `Build falhou: ${s.error}`;
-    else if (!s.packageReady) text = 'O pacote de build será baixado e validado ao iniciar.';
-    $('#apkBuildStatus').textContent = text;
-
-    if (apkBuildPoll) clearInterval(apkBuildPoll);
-    apkBuildPoll = s.running ? setInterval(() => {
-      if (current !== 'apk-build') { clearInterval(apkBuildPoll); apkBuildPoll = null; return; }
-      refreshApkBuildStatus();
-    }, 2000) : null;
-  }
-
-  async function refreshApkBuildStatus() {
-    try { paintApkBuild(await api('/api/apk-build')); }
-    catch (e) { $('#apkBuildStatus').textContent = 'Não foi possível consultar o build: ' + e.message; }
-  }
-
-  async function loadApkBuild() {
-    $('#editor').classList.add('hidden');
-    $('#logs').classList.add('hidden');
-    $('#apkBuilder').classList.remove('hidden');
-    await refreshApkBuildStatus();
-  }
-
-  async function startApkBuild(ev) {
-    ev.preventDefault();
-    const button = $('#apkBuildButton');
-    button.disabled = true;
-    try {
-      const result = await api('/api/apk-build', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ host: $('#apkHost').value, acknowledge: $('#apkAcknowledge').checked }),
-      });
-      toast(result.message || 'Build iniciado.', 'ok');
-      await refreshApkBuildStatus();
-    } catch (e) {
-      toast('Não foi possível iniciar: ' + e.message, 'err');
-      button.disabled = false;
-    }
-  }
-
   function emptyState(title, text, withAction = true) {
     return `<div class="empty">
       <div class="empty-icon">${ICON_EMPTY}</div>
@@ -365,6 +311,7 @@
     $('#editor').classList.remove('hidden');
     if (current === 'configs') renderConfigs();
     else if (current === 'webview') renderWebView();
+    else if (current === 'apk') renderApk();
     else renderGeneric();
   }
 
@@ -411,6 +358,74 @@
   }
 
 
+
+  function renderApk() {
+    updateCount();
+    const have = new Set(rows.map((r) => r.name));
+    const defaults = {
+      APP_CURRENT_VERSION: { type: 'STRING', value: '1.0.0' },
+      APP_UPDATE_CURRENT_VERSION: { type: 'STRING', value: '1.0.0' },
+      APP_DOWNLOAD_URL: { type: 'STRING', value: '' },
+      APP_UPDATE_DOWNLOAD_URL: { type: 'STRING', value: '' },
+      APP_BTN_UPDATE_ENABLED: { type: 'BOOLEAN', value: true },
+      APP_NATIVE_ACTION_UPDATE_ENABLED: { type: 'BOOLEAN', value: true },
+      APP_UPDATE_LAST_SEEN_ENABLED: { type: 'BOOLEAN', value: false },
+    };
+    for (const k of APK_KEYS) {
+      if (!have.has(k)) {
+        rows.push({ name: k, type: defaults[k].type, value: defaults[k].value });
+        dirty = true;
+      }
+    }
+    const list = APK_KEYS.map((k) => rows.find((r) => r.name === k)).filter(Boolean);
+
+    $('#editor').innerHTML = `
+      <div class="wv-help">
+        <strong>APK / Atualização</strong>
+        <p>Configure a versão e o link do APK. Se a versão mínima for maior que a do app instalado, o usuário é obrigado a atualizar. Cole o link direto do .apk (HTTP/HTTPS).</p>
+      </div>
+      ${list.map((row) => {
+        const idx = rows.indexOf(row);
+        const label = APK_LABELS[row.name] || row.name;
+        const isBool = String(row.type).toUpperCase() === 'BOOLEAN' || String(row.name).includes('ENABLED');
+        const val = row.value === null || row.value === undefined || row.value === 'None' ? '' : row.value;
+        if (isBool) {
+          const checked = val === true || val === 'true' || val === 'True' || val === 1 || val === '1';
+          return `<article class="card wv-card" data-idx="${idx}">
+            <div class="wv-head"><h3>${esc(label)}</h3><span class="chip">${esc(row.name)}</span></div>
+            <label class="wv-switch">
+              <input type="checkbox" data-apk-bool="${idx}" ${checked ? 'checked' : ''}>
+              <span>${checked ? 'Ativado' : 'Desativado'}</span>
+            </label>
+          </article>`;
+        }
+        const isUrl = String(row.name).includes('URL');
+        return `<article class="card wv-card" data-idx="${idx}">
+          <div class="wv-head"><h3>${esc(label)}</h3><span class="chip">${esc(row.name)}</span></div>
+          <input class="apk-input" type="text" data-apk-val="${idx}" value="${esc(val)}" placeholder="${isUrl ? 'https://seu-site.com/app.apk' : '1.0.0'}">
+        </article>`;
+      }).join('')}
+    `;
+
+    $$('[data-apk-bool]').forEach((el) => {
+      el.addEventListener('change', () => {
+        const i = Number(el.getAttribute('data-apk-bool'));
+        rows[i].value = el.checked;
+        rows[i].type = 'BOOLEAN';
+        dirty = true;
+        const span = el.parentElement.querySelector('span');
+        if (span) span.textContent = el.checked ? 'Ativado' : 'Desativado';
+      });
+    });
+    $$('[data-apk-val]').forEach((el) => {
+      el.addEventListener('input', () => {
+        const i = Number(el.getAttribute('data-apk-val'));
+        rows[i].value = el.value;
+        dirty = true;
+      });
+    });
+  }
+
   function renderWebView() {
     updateCount();
     const items = rows.filter((r) => isWebViewKey(r.name));
@@ -439,7 +454,7 @@
         const idx = rows.indexOf(row);
         const label = WEBVIEW_LABELS[row.name] || row.name;
         const isBool = String(row.type).toUpperCase() === 'BOOLEAN' || String(row.name).includes('ENABLED');
-        const val = row.value === null || row.value === undefined ? '' : row.value;
+        const val = row.value === null || row.value === undefined || row.value === 'None' ? '' : row.value;
         if (isBool) {
           const checked = val === true || val === 'true' || val === 'True' || val === 1 || val === '1';
           return `<article class="card wv-card" data-idx="${idx}">
@@ -1081,50 +1096,22 @@
     }
   }
 
-  function applyTheme(theme) {
-    const value = theme === 'dark' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', value);
-    const label = $('#themeToggle span');
-    if (label) label.textContent = value === 'dark' ? 'Modo claro' : 'Modo escuro';
-    $('#themeToggle').setAttribute('aria-pressed', value === 'dark' ? 'true' : 'false');
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = value === 'dark' ? '#0b0e12' : '#f1f3f5';
-  }
-
-  function toggleTheme() {
-    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    try { localStorage.setItem('dtmod-theme', next); } catch (_) {}
-    applyTheme(next);
-  }
-
-  function setSidebarOpen(open) {
-    $('#sidebar').classList.toggle('mobile-open', open);
-    $('#navBackdrop').classList.toggle('show', open);
-    $('#navToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
-    document.body.classList.toggle('nav-open', open);
-  }
-
   function selectTab(file) {
     current = file;
     $$('#tabs .tab').forEach((t) => t.classList.toggle('active', t.dataset.file === file));
-    setSidebarOpen(false);
     $('#pageTitle').textContent = TITLES[file] || file;
     $('#pageSub').textContent = SUBTITLES[file] || '';
     $('#search').value = '';
     const addBtn = $('#add');
-    if (addBtn) addBtn.style.display = (file === 'webview' || file === 'logs' || file === 'home' || file === 'apk-build') ? 'none' : '';
-    const isHome = file === 'home';
-    const isBuild = file === 'apk-build';
-    const isSpecial = isHome || isBuild;
-    $('#toolbar').classList.toggle('hidden', isSpecial);
-    $('#search').disabled = file === 'logs' || isSpecial;
+    if (addBtn) addBtn.style.display = (file === 'webview' || file === 'apk' || file === 'logs') ? 'none' : '';
+    $('#search').disabled = file === 'logs';
     const isConfigs = file === 'configs';
     const isLogs = file === 'logs';
     $('#export').classList.toggle('hidden', !isConfigs);
     $('#import').classList.toggle('hidden', !isConfigs);
-    $('#add').classList.toggle('hidden', isLogs || isSpecial);
-    $('#save').classList.toggle('hidden', isLogs || isSpecial);
-    $('#restore').classList.toggle('hidden', isLogs || isSpecial);
+    $('#add').classList.toggle('hidden', isLogs);
+    $('#save').classList.toggle('hidden', isLogs);
+    $('#restore').classList.toggle('hidden', isLogs);
     load();
   }
 
@@ -1152,17 +1139,6 @@
     $$('#tabs .tab').forEach((t) =>
       t.addEventListener('click', () => selectTab(t.dataset.file))
     );
-    $('#navToggle').addEventListener('click', () => setSidebarOpen(!$('#sidebar').classList.contains('mobile-open')));
-    $('#navClose').addEventListener('click', () => setSidebarOpen(false));
-    $('#navBackdrop').addEventListener('click', () => setSidebarOpen(false));
-    $('#themeToggle').addEventListener('click', toggleTheme);
-    $('#homeDashboard').addEventListener('click', (ev) => {
-      const shortcut = ev.target.closest('[data-goto]');
-      if (shortcut) selectTab(shortcut.dataset.goto);
-    });
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 991) setSidebarOpen(false);
-    });
 
     $('#save').addEventListener('click', save);
     $('#export').addEventListener('click', exportJson);
@@ -1180,7 +1156,6 @@
     $('#passClose').addEventListener('click', closePasswordModal);
     $('#passCancel').addEventListener('click', closePasswordModal);
     $('#passSave').addEventListener('click', savePassword);
-    $('#apkBuildForm').addEventListener('submit', startApkBuild);
 
     $('#modal').addEventListener('click', (ev) => {
       if (ev.target === $('#modal')) closeEditor();
@@ -1242,15 +1217,9 @@
   }
 
   async function boot() {
-    try {
-      const savedTheme = localStorage.getItem('dtmod-theme');
-      const systemTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      applyTheme(savedTheme || systemTheme);
-    }
-    catch (_) { applyTheme('light'); }
     bind();
     await Promise.all([loadSchema(), loadMeta()]);
-    selectTab('home');
+    selectTab('configs');
     loadStatus();
     setInterval(loadStatus, 15000);
   }
