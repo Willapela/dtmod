@@ -8,25 +8,25 @@
  */
 
 // ---------------------------------------------------------------- campos base
-const NOME = { k: 'name', t: 'text', l: 'Nome', h: 'Digite um nome descritivo' };
+const NOME = { k: 'name', t: 'text', l: 'Nome da conexão', h: 'Ex: TIM SSL, VIVO SSH' };
 const DESC = { k: 'description', t: 'textarea', l: 'Descrição', h: 'Descreva a finalidade e os detalhes importantes' };
 // Categoria: select com as categorias ja criadas (o front carrega do /api/categories)
 const CATEGORIA = { k: 'category', t: 'category', l: 'Categoria', h: 'escolha ou crie uma nova' };
 const ORDEM = { k: 'sorter', t: 'number', l: 'Ordem', h: 'Exemplo: 1' };
 const ICONE = { k: 'icon', t: 'text', l: 'Ícone (URL)', h: 'https://exemplo.com/imagem.png' };
-const CHECKUSER = { k: 'url_check_user', t: 'text', l: 'Check user', h: 'URL que valida o usuário' };
+const CHECKUSER = { k: 'url_check_user', t: 'text', l: 'Check User (URL)', h: 'URL que valida usuário/senha' };
 const USUARIO = { k: 'username', t: 'text', l: 'Usuário', h: 'usuário da autenticação da conexão' };
 const SENHA = { k: 'password', t: 'password', l: 'Senha', h: 'senha da autenticação da conexão' };
 
-const PAYLOAD = { k: 'payload', t: 'textarea', l: 'Payload', h: 'payload enviado na conexão' };
+const PAYLOAD = { k: 'payload', t: 'textarea', l: 'Payload / HTTP', h: 'GET / HTTP/1.1[lf]Host: [host][lf][lf]' };
 const SNI = { k: 'sni', t: 'text', l: 'SNI', h: 'server name (obrigatorio)' };
 const PROTO = { k: 'dt_protocol', t: 'select', l: 'Tipo do protocolo', opts: ['TCP', 'UDP', 'QUIC'] };
 const TLS = { k: 'tls_version', t: 'select', l: 'Versão TLS', opts: ['TLSv1.1', 'TLSv1.2', 'TLSv1.3'] };
 
-const SERVIDOR = { k: 'servers', t: 'text', l: 'Servidor', h: 'Ex.: tunnel.example.com' };
+const SERVIDOR = { k: 'servers', t: 'text', l: 'Host / Servidor', h: 'IP ou domínio do servidor' };
 const PORTA_SERVIDOR = { k: 'port', t: 'number', l: 'Porta do servidor', h: 'Ex: 80' };
-const PROXY = { k: 'proxy_host', t: 'text', l: 'Proxy', h: 'Ex: 127.0.0.1' };
-const PORTA_PROXY = { k: 'proxy_port', t: 'number', l: 'Porta do proxy', h: 'Ex: 80' };
+const PROXY = { k: 'proxy_host', t: 'text', l: 'Proxy / IP', h: 'IP do proxy ou bug host' };
+const PORTA_PROXY = { k: 'proxy_port', t: 'number', l: 'Porta do proxy', h: 'Ex: 80, 443, 8080' };
 const DNS1 = { k: 'dns1', t: 'text', l: 'DNS', h: 'Ex: 8.8.8.8' };
 const DNS2 = { k: 'dns2', t: 'text', l: 'DNS 2', h: 'Ex: 8.8.4.4' };
 const UDP = { k: 'udp_ports', t: 'dns', l: 'Porta(s) UDP', h: 'Ex: 7300,7301,7302' };
