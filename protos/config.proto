@@ -1,0 +1,41 @@
+syntax = "proto3";
+package com.app.config;
+
+message Empty {}
+
+message Category {
+  int32 id = 1;
+  string name = 2;
+  string color = 3;
+  int32 order = 4;
+}
+
+message CategoriesReply {
+  repeated Category data = 1;
+}
+
+message Endpoint {
+  string id = 1;
+  string name = 2;
+  string type = 3;
+  string value = 4;
+}
+
+message EndpointsReply {
+  repeated Endpoint data = 1;
+}
+
+message ConfigReply {
+  string data = 1;
+}
+
+message HashReply {
+  string hash = 1;
+}
+
+service ConfigService {
+  rpc GetConfig(Empty) returns (ConfigReply);
+  rpc getCategories(Empty) returns (CategoriesReply);
+  rpc getEndpoints(Empty) returns (EndpointsReply);
+  rpc getHash(Empty) returns (HashReply);
+}

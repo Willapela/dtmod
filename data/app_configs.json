@@ -1,0 +1,1839 @@
+[
+ {
+  "name": "APP_LOGO",
+  "type": "IMAGE",
+  "value": null
+ },
+ {
+  "name": "APP_BACKGROUND_IMAGE",
+  "type": "IMAGE",
+  "value": null
+ },
+ {
+  "name": "APP_BACKGROUND_TYPE",
+  "type": "SELECT",
+  "value": {
+   "options": [
+    {
+     "label": "Imagem",
+     "value": "IMAGE"
+    },
+    {
+     "label": "Cor",
+     "value": "COLOR"
+    },
+    {
+     "label": "Degradê",
+     "value": "GRADIENT"
+    }
+   ],
+   "selected": "GRADIENT"
+  }
+ },
+ {
+  "name": "APP_BACKGROUND_COLOR",
+  "type": "COLOR",
+  "value": "#121419"
+ },
+ {
+  "name": "APP_NATIVE_BACKGROUND_COLOR",
+  "type": "COLOR",
+  "value": "#121419"
+ },
+ {
+  "name": "APP_NATIVE_BACKGROUND_GRADIENT_START_COLOR",
+  "type": "COLOR",
+  "value": "#2C3038"
+ },
+ {
+  "name": "APP_NATIVE_BACKGROUND_GRADIENT_CENTER_COLOR",
+  "type": "COLOR",
+  "value": "#16191F"
+ },
+ {
+  "name": "APP_NATIVE_BACKGROUND_GRADIENT_END_COLOR",
+  "type": "COLOR",
+  "value": "#121419"
+ },
+ {
+  "name": "APP_NATIVE_CARD_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_STATUS_CARD_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_CATEGORY_COLOR",
+  "type": "COLOR",
+  "value": "#686F78"
+ },
+ {
+  "name": "APP_NATIVE_ELEVATED_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_COLOR",
+  "type": "COLOR",
+  "value": "#181B22"
+ },
+ {
+  "name": "APP_NATIVE_BORDER_COLOR",
+  "type": "COLOR",
+  "value": "#00000000"
+ },
+ {
+  "name": "APP_NATIVE_INPUT_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_BUTTON_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_MENU_CARD_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_MENU_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_MENU_TITLE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_MENU_VERSION_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_MENU_SECTION_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_MENU_ITEM_TITLE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_MENU_ITEM_DESCRIPTION_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_MENU_ITEM_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#686F78"
+ },
+ {
+  "name": "APP_NATIVE_MENU_FOOTER_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_MENU_CLOSE_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_MENU_CLOSE_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_MENU_HOTSPOT_ACTIVE_COLOR",
+  "type": "COLOR",
+  "value": "#4ED48A"
+ },
+ {
+  "name": "APP_NATIVE_MENU_AIRPLANE_ACTIVE_COLOR",
+  "type": "COLOR",
+  "value": "#F5C451"
+ },
+ {
+  "name": "APP_NATIVE_MENU_BATTERY_ACTIVE_COLOR",
+  "type": "COLOR",
+  "value": "#4ED48A"
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_TITLE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_CONTENT_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_ICON_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_SECONDARY_ACTION_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_SECONDARY_ACTION_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_PRIMARY_ACTION_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_PRIMARY_ACTION_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_HANDLE_COLOR",
+  "type": "COLOR",
+  "value": "#686F78"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_NAME_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_DESCRIPTION_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_MODE_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_MODE_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_FAVORITE_INACTIVE_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_CATEGORY_NAME_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_HEADER_ACTION_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_HEADER_ACTION_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_HEADER_NAME_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_ACCOUNT_AVATAR_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_ACCOUNT_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_ACCOUNT_NAME_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_ACCOUNT_EXPIRATION_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_ACCOUNT_BADGE_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#686F7826"
+ },
+ {
+  "name": "APP_NATIVE_ACCOUNT_BADGE_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_LABEL_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_DETAIL_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_TRAFFIC_CARD_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_TRAFFIC_LABEL_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_TRAFFIC_VALUE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_INFO_CARD_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_INFO_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_NAVIGATION_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_NAVIGATION_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_NAVIGATION_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_OVERVIEW_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_OVERVIEW_LABEL_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_OVERVIEW_VALUE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_WORLD_MAP_COLOR",
+  "type": "COLOR",
+  "value": "#686F78"
+ },
+ {
+  "name": "APP_NATIVE_EMPTY_STATE_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_EMPTY_STATE_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_EMPTY_STATE_TITLE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_EMPTY_STATE_DESCRIPTION_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_EMPTY_STATE_ACTION_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_EMPTY_STATE_ACTION_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_TEXT_MUTED_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_ICON_MUTED_COLOR",
+  "type": "COLOR",
+  "value": "#686F78"
+ },
+ {
+  "name": "APP_NATIVE_STATUS_CONNECTED_COLOR",
+  "type": "COLOR",
+  "value": "#4ED48A"
+ },
+ {
+  "name": "APP_NATIVE_STATUS_CONNECTING_COLOR",
+  "type": "COLOR",
+  "value": "#F5C451"
+ },
+ {
+  "name": "APP_NATIVE_STATUS_DISCONNECTED_COLOR",
+  "type": "COLOR",
+  "value": "#FF5C67"
+ },
+ {
+  "name": "APP_NATIVE_CARD_RADIUS",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_STATUS_CARD_RADIUS",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_INPUT_RADIUS",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_BUTTON_RADIUS",
+  "type": "INTEGER",
+  "value": 20
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_RADIUS",
+  "type": "INTEGER",
+  "value": 28
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_BUTTON_SIZE",
+  "type": "INTEGER",
+  "value": 184
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_RING_COLOR",
+  "type": "COLOR",
+  "value": "#1B1E24"
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_RING_BORDER_COLOR",
+  "type": "COLOR",
+  "value": "#3C414A"
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_CORE_START_COLOR",
+  "type": "COLOR",
+  "value": "#2D323A"
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_CORE_END_COLOR",
+  "type": "COLOR",
+  "value": "#191C22"
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_CORE_BORDER_COLOR",
+  "type": "COLOR",
+  "value": "#484D57"
+ },
+ {
+  "name": "APP_NATIVE_SCREEN_HORIZONTAL_PADDING",
+  "type": "INTEGER",
+  "value": 20
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_HORIZONTAL_PADDING",
+  "type": "INTEGER",
+  "value": 12
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_VERTICAL_PADDING",
+  "type": "INTEGER",
+  "value": 8
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_HORIZONTAL_PADDING",
+  "type": "INTEGER",
+  "value": 14
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_BOTTOM_PADDING",
+  "type": "INTEGER",
+  "value": 12
+ },
+ {
+  "name": "APP_NATIVE_LIST_ITEM_HORIZONTAL_PADDING",
+  "type": "INTEGER",
+  "value": 12
+ },
+ {
+  "name": "APP_NATIVE_LIST_ITEM_VERTICAL_PADDING",
+  "type": "INTEGER",
+  "value": 8
+ },
+ {
+  "name": "APP_NATIVE_LOGO",
+  "type": "IMAGE",
+  "value": null
+ },
+ {
+  "name": "APP_NATIVE_BACKGROUND_IMAGE",
+  "type": "IMAGE",
+  "value": null
+ },
+ {
+  "name": "APP_NATIVE_BACKGROUND_TYPE",
+  "type": "SELECT",
+  "value": {
+   "options": [
+    {
+     "label": "Imagem",
+     "value": "IMAGE"
+    },
+    {
+     "label": "Cor",
+     "value": "COLOR"
+    },
+    {
+     "label": "Degradê",
+     "value": "GRADIENT"
+    }
+   ],
+   "selected": "GRADIENT"
+  }
+ },
+ {
+  "name": "APP_NATIVE_SHOW_CONNECTION_MODE",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_BORDER_COLOR",
+  "type": "COLOR",
+  "value": "#00000000"
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_ICON_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#292D35"
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_LABEL_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_NAME_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_MODE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_CHEVRON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_ITEM_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_RADIUS",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_HEIGHT",
+  "type": "INTEGER",
+  "value": 62
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_TOP_SPACING",
+  "type": "INTEGER",
+  "value": 14
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_ICON_CONTAINER_SIZE",
+  "type": "INTEGER",
+  "value": 42
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_ICON_SIZE",
+  "type": "INTEGER",
+  "value": 22
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_CONTENT_SPACING",
+  "type": "INTEGER",
+  "value": 14
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_LABEL_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 11
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_NAME_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 15
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_MODE_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 11
+ },
+ {
+  "name": "APP_NATIVE_SERVER_CARD_CHEVRON_SIZE",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_ITEM_RADIUS",
+  "type": "INTEGER",
+  "value": 14
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_ITEM_MIN_HEIGHT",
+  "type": "INTEGER",
+  "value": 56
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_ITEM_SPACING",
+  "type": "INTEGER",
+  "value": 6
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_ICON_CONTAINER_SIZE",
+  "type": "INTEGER",
+  "value": 32
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_ICON_SIZE",
+  "type": "INTEGER",
+  "value": 22
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_NAME_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 14
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_DESCRIPTION_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 11
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_MODE_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 11
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_LIST_SELECTION_ICON_SIZE",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_CATEGORY_HEADER_RADIUS",
+  "type": "INTEGER",
+  "value": 14
+ },
+ {
+  "name": "APP_NATIVE_CATEGORY_HEADER_MIN_HEIGHT",
+  "type": "INTEGER",
+  "value": 36
+ },
+ {
+  "name": "APP_NATIVE_CATEGORY_HEADER_TOP_SPACING",
+  "type": "INTEGER",
+  "value": 14
+ },
+ {
+  "name": "APP_NATIVE_CATEGORY_HEADER_BOTTOM_SPACING",
+  "type": "INTEGER",
+  "value": 6
+ },
+ {
+  "name": "APP_NATIVE_CATEGORY_NAME_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 11
+ },
+ {
+  "name": "APP_NATIVE_CATEGORY_COUNT_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 11
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_TITLE_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_HEADER_HEIGHT",
+  "type": "INTEGER",
+  "value": 48
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_HANDLE_WIDTH",
+  "type": "INTEGER",
+  "value": 36
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_HANDLE_HEIGHT",
+  "type": "INTEGER",
+  "value": 4
+ },
+ {
+  "name": "APP_BACKGROUND_GRADIENT_START_COLOR",
+  "type": "COLOR",
+  "value": "#2C3038"
+ },
+ {
+  "name": "APP_BACKGROUND_GRADIENT_CENTER_COLOR",
+  "type": "COLOR",
+  "value": "#16191F"
+ },
+ {
+  "name": "APP_BACKGROUND_GRADIENT_END_COLOR",
+  "type": "COLOR",
+  "value": "#121419"
+ },
+ {
+  "name": "APP_CARD_COLOR",
+  "type": "COLOR",
+  "value": "#1B1E24"
+ },
+ {
+  "name": "APP_SURFACE_ELEVATED_COLOR",
+  "type": "COLOR",
+  "value": "#1D2026"
+ },
+ {
+  "name": "APP_CARD_RADIUS",
+  "type": "INTEGER",
+  "value": 20
+ },
+ {
+  "name": "APP_CARD_STATUS_COLOR",
+  "type": "COLOR",
+  "value": "#191C21"
+ },
+ {
+  "name": "APP_CARD_STATUS_RADIUS",
+  "type": "INTEGER",
+  "value": 25
+ },
+ {
+  "name": "APP_CONNECTION_BUTTON_SIZE",
+  "type": "INTEGER",
+  "value": 230
+ },
+ {
+  "name": "APP_CARD_CONFIG_COLOR",
+  "type": "COLOR",
+  "value": "#1B1E24"
+ },
+ {
+  "name": "APP_CONFIG_CATEGORY_DEFAULT_COLOR",
+  "type": "COLOR",
+  "value": "#686F78"
+ },
+ {
+  "name": "APP_DIALOG_BACKGROUND_COLOR",
+  "type": "COLOR",
+  "value": "#1B1E24"
+ },
+ {
+  "name": "APP_BORDER_COLOR",
+  "type": "COLOR",
+  "value": "#2D323A"
+ },
+ {
+  "name": "APP_INPUT_COLOR",
+  "type": "COLOR",
+  "value": "#191C21"
+ },
+ {
+  "name": "APP_INPUT_RADIUS",
+  "type": "INTEGER",
+  "value": 25
+ },
+ {
+  "name": "APP_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_TEXT_MUTED_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_BUTTON_COLOR",
+  "type": "COLOR",
+  "value": "#1D2026"
+ },
+ {
+  "name": "APP_BUTTON_RADIUS",
+  "type": "INTEGER",
+  "value": 25
+ },
+ {
+  "name": "APP_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_ICON_MUTED_COLOR",
+  "type": "COLOR",
+  "value": "#686F78"
+ },
+ {
+  "name": "APP_STATUS_CONNECTED_COLOR",
+  "type": "COLOR",
+  "value": "#4ED48A"
+ },
+ {
+  "name": "APP_STATUS_CONNECTING_COLOR",
+  "type": "COLOR",
+  "value": "#F5C451"
+ },
+ {
+  "name": "APP_STATUS_DISCONNECTED_COLOR",
+  "type": "COLOR",
+  "value": "#FF5C67"
+ },
+ {
+  "name": "APP_ADS_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_SHOW_CONNECTION_MODE",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_CONNECTION_LIMITER",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_BTN_UPDATE_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_BTN_LOGGER_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_BTN_PAGE_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_BTN_MENU_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_UPDATE_LAST_SEEN_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_VPN_USAGE_MONITORING_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_CONFIG_LOCATION_PERMISSION",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_DIALOG_ERROR_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_CHECKUSER_DIALOG_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_DIALOG_NOTIFICATION_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_SUCCESS_TOAST_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_ERROR_TOAST_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_LOCAL_IP_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_CONFIG_FILTER_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_PING_SERVICE_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_PING_URL",
+  "type": "STRING",
+  "value": "http://clients3.google.com/generate_204"
+ },
+ {
+  "name": "APP_CONNECTIVITY_CHECK_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_CDN_COUNT_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_ENDPOINT_COUNT_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_AIRPLANE_MODE",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_AIRPLANE_MODE_TIMEOUT",
+  "type": "INTEGER",
+  "value": 1
+ },
+ {
+  "name": "APP_ALERT_SOUND_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_CURRENT_VERSION",
+  "type": "STRING",
+  "value": "4.5.0"
+ },
+ {
+  "name": "APP_DOWNLOAD_URL",
+  "type": "STRING",
+  "value": null
+ },
+ {
+  "name": "APP_LAYOUT_WEBVIEW_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_SUPPORT_BUTTON",
+  "type": "HTML",
+  "value": null
+ },
+ {
+  "name": "APP_WEB_VIEW",
+  "type": "HTML",
+  "value": null
+ },
+ {
+  "name": "APP_MENU_HOTSPOT_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_MENU_AIRPLANE_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_MENU_APN_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_MENU_NETWORK_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_MENU_BATTERY_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_MENU_IMPORT_KEY_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_MENU_DIAGNOSTIC_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_MENU_CLEAN_APP_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_MENU_FOOTER_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_MENU_CARD_COLOR",
+  "type": "COLOR",
+  "value": "#1D2026"
+ },
+ {
+  "name": "APP_NATIVE_ACTION_UPDATE_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_ACTION_LOGGER_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_ACTION_PAGE_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_ACTION_MENU_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_INFO_LOCAL_IP_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_INFO_PING_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_INFO_ENDPOINT_COUNT_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_CONNECTION_OVERVIEW_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_IMAGE",
+  "type": "IMAGE",
+  "value": ""
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_TITLE",
+  "type": "STRING",
+  "value": ""
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_DESCRIPTION",
+  "type": "STRING",
+  "value": ""
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_ACTION_LABEL",
+  "type": "STRING",
+  "value": ""
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_ACTION_URL",
+  "type": "URL",
+  "value": ""
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_ACTION_TARGET",
+  "type": "SELECT",
+  "value": {
+   "options": [
+    {
+     "label": "Dentro do app",
+     "value": "IN_APP"
+    },
+    {
+     "label": "Navegador externo",
+     "value": "EXTERNAL"
+    }
+   ],
+   "selected": "IN_APP"
+  }
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_BACKGROUND_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_OVERLAY_COLOR",
+  "type": "COLOR",
+  "value": "#99000000"
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_TITLE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_DESCRIPTION_COLOR",
+  "type": "COLOR",
+  "value": "#D0D3D8"
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_ACTION_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_DISMISS_COLOR",
+  "type": "COLOR",
+  "value": "#D0D3D8"
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_RADIUS",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_HEIGHT",
+  "type": "INTEGER",
+  "value": 96
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_START_AT",
+  "type": "STRING",
+  "value": ""
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_END_AT",
+  "type": "STRING",
+  "value": ""
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_AUDIENCE",
+  "type": "SELECT",
+  "value": {
+   "options": [
+    {
+     "label": "Sempre",
+     "value": "BOTH"
+    },
+    {
+     "label": "Somente conectado",
+     "value": "CONNECTED"
+    },
+    {
+     "label": "Somente desconectado",
+     "value": "DISCONNECTED"
+    }
+   ],
+   "selected": "BOTH"
+  }
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_DISMISSIBLE",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_BRAND_BANNER_MAX_IMPRESSIONS",
+  "type": "INTEGER",
+  "value": 0
+ },
+ {
+  "name": "APP_NATIVE_CREDENTIALS_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_TRAFFIC_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_BOTTOM_NAVIGATION_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_NETWORK_DETAILS_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_NATIVE_WORLD_MAP_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_NATIVE_EMPTY_STATE_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_HAPTIC_FEEDBACK_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_MOTION_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_FAVORITES_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_RECENTS_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_NATIVE_HEADER_IDENTITY_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_NATIVE_HEADER_LOGO",
+  "type": "IMAGE",
+  "value": ""
+ },
+ {
+  "name": "APP_NATIVE_HEADER_NAME",
+  "type": "STRING",
+  "value": ""
+ },
+ {
+  "name": "APP_NATIVE_UI_SCHEMA",
+  "type": "STRING",
+  "value": "{\"version\":1,\"screens\":{\"home\":{\"id\":\"home-root\",\"type\":\"column\",\"enabled\":true,\"gap\":10,\"children\":[{\"id\":\"home-header\",\"type\":\"component\",\"component\":\"header\",\"span\":12,\"enabled\":true},{\"id\":\"home-connection\",\"type\":\"component\",\"component\":\"connection\",\"span\":12,\"enabled\":true},{\"id\":\"home-overview\",\"type\":\"component\",\"component\":\"overview\",\"span\":12,\"enabled\":true},{\"id\":\"home-content\",\"type\":\"column\",\"enabled\":true,\"gap\":10,\"children\":[{\"id\":\"home-server\",\"type\":\"component\",\"component\":\"server\",\"span\":12,\"enabled\":true},{\"id\":\"home-traffic\",\"type\":\"row\",\"enabled\":true,\"gap\":10,\"children\":[{\"id\":\"home-download\",\"type\":\"component\",\"component\":\"download\",\"span\":6,\"enabled\":true},{\"id\":\"home-upload\",\"type\":\"component\",\"component\":\"upload\",\"span\":6,\"enabled\":true}]},{\"id\":\"home-info\",\"type\":\"row\",\"enabled\":true,\"gap\":6,\"children\":[{\"id\":\"home-local-ip\",\"type\":\"component\",\"component\":\"local-ip\",\"span\":5,\"enabled\":true},{\"id\":\"home-ping\",\"type\":\"component\",\"component\":\"ping\",\"span\":3,\"enabled\":true},{\"id\":\"home-endpoints\",\"type\":\"component\",\"component\":\"endpoints\",\"span\":4,\"enabled\":true}]},{\"id\":\"home-banner\",\"type\":\"component\",\"component\":\"banner\",\"span\":12,\"enabled\":true}]},{\"id\":\"home-navigation\",\"type\":\"row\",\"enabled\":true,\"gap\":0,\"children\":[{\"id\":\"home-page\",\"type\":\"component\",\"component\":\"page\",\"span\":4,\"enabled\":true},{\"id\":\"home-logger\",\"type\":\"component\",\"component\":\"logger\",\"span\":4,\"enabled\":true},{\"id\":\"home-update\",\"type\":\"component\",\"component\":\"update\",\"span\":4,\"enabled\":true}]}]}}}"
+ },
+ {
+  "name": "APP_NATIVE_CONTENT_ORDER",
+  "type": "SELECT",
+  "value": {
+   "options": [
+    {
+     "label": "Servidor, tráfego, informações e banner",
+     "value": "SERVER,TRAFFIC,INFO,BANNER"
+    },
+    {
+     "label": "Servidor, banner, tráfego e informações",
+     "value": "SERVER,BANNER,TRAFFIC,INFO"
+    },
+    {
+     "label": "Banner, servidor, tráfego e informações",
+     "value": "BANNER,SERVER,TRAFFIC,INFO"
+    },
+    {
+     "label": "Servidor, informações, tráfego e banner",
+     "value": "SERVER,INFO,TRAFFIC,BANNER"
+    }
+   ],
+   "selected": "SERVER,TRAFFIC,INFO,BANNER"
+  }
+ },
+ {
+  "name": "APP_NATIVE_BOTTOM_ACTION_ORDER",
+  "type": "SELECT",
+  "value": {
+   "options": [
+    {
+     "label": "Página, registros e atualização",
+     "value": "PAGE,LOGGER,UPDATE"
+    },
+    {
+     "label": "Atualização, página e registros",
+     "value": "UPDATE,PAGE,LOGGER"
+    },
+    {
+     "label": "Atualização, registros e página",
+     "value": "UPDATE,LOGGER,PAGE"
+    },
+    {
+     "label": "Registros, página e atualização",
+     "value": "LOGGER,PAGE,UPDATE"
+    }
+   ],
+   "selected": "PAGE,LOGGER,UPDATE"
+  }
+ },
+ {
+  "name": "APP_NATIVE_LAYOUT_DENSITY",
+  "type": "SELECT",
+  "value": {
+   "options": [
+    {
+     "label": "Confortável",
+     "value": "COMFORTABLE"
+    },
+    {
+     "label": "Compacto",
+     "value": "COMPACT"
+    }
+   ],
+   "selected": "COMFORTABLE"
+  }
+ },
+ {
+  "name": "APP_NATIVE_CONTENT_TEXT_SCALE",
+  "type": "INTEGER",
+  "value": 100
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_ERROR_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_CHECK_USER_SUMMARY_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_DIALOG_NOTIFICATION_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_FEEDBACK_SUCCESS_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_FEEDBACK_ERROR_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_MENU_HOTSPOT_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_MENU_AIRPLANE_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_MENU_APN_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_MENU_NETWORK_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_MENU_BATTERY_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_MENU_IMPORT_KEY_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_MENU_DIAGNOSTIC_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_MENU_CLEAN_APP_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_NATIVE_MENU_FOOTER_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_RUNTIME_CONNECTION_LIMITER_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_RUNTIME_VPN_USAGE_MONITORING_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_RUNTIME_CONFIG_LOCATION_PERMISSION_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_RUNTIME_CONFIG_FILTER_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_RUNTIME_PING_ENABLED",
+  "type": "BOOLEAN",
+  "value": true
+ },
+ {
+  "name": "APP_RUNTIME_PING_URL",
+  "type": "STRING",
+  "value": "http://clients3.google.com/generate_204"
+ },
+ {
+  "name": "APP_RUNTIME_AIRPLANE_RECOVERY_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_RUNTIME_AIRPLANE_RECOVERY_TIMEOUT_SECONDS",
+  "type": "INTEGER",
+  "value": 1
+ },
+ {
+  "name": "APP_RUNTIME_ALERT_SOUND_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_RUNTIME_ADVERTISING_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_WEB_LAYOUT_ENABLED",
+  "type": "BOOLEAN",
+  "value": false
+ },
+ {
+  "name": "APP_WEB_HOME_CONTENT",
+  "type": "HTML",
+  "value": ""
+ },
+ {
+  "name": "APP_WEB_PAGE_CONTENT",
+  "type": "HTML",
+  "value": ""
+ },
+ {
+  "name": "APP_UPDATE_CURRENT_VERSION",
+  "type": "STRING",
+  "value": "4.5.0"
+ },
+ {
+  "name": "APP_UPDATE_DOWNLOAD_URL",
+  "type": "STRING",
+  "value": ""
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#181B22"
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_TITLE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_CONTENT_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_ICON_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_SECONDARY_ACTION_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_SECONDARY_ACTION_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_PRIMARY_ACTION_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_PRIMARY_ACTION_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_HANDLE_COLOR",
+  "type": "COLOR",
+  "value": "#686F78"
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#181B22"
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_TITLE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_CONTENT_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_ICON_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_PRIMARY_ACTION_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_PRIMARY_ACTION_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_DETAIL_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_DETAIL_TEXT_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_BORDER_COLOR",
+  "type": "COLOR",
+  "value": "#00000000"
+ },
+ {
+  "name": "APP_NATIVE_LOGGER_DIALOG_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#181B22"
+ },
+ {
+  "name": "APP_NATIVE_LOGGER_DIALOG_TITLE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_LOGGER_DIALOG_CONTENT_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_LOGGER_DIALOG_ICON_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_LOGGER_DIALOG_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#181B22"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_TITLE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_CONTENT_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_ICON_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_HANDLE_COLOR",
+  "type": "COLOR",
+  "value": "#686F78"
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#181B22"
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_TITLE_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_CONTENT_COLOR",
+  "type": "COLOR",
+  "value": "#8C939E"
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_ICON_SURFACE_COLOR",
+  "type": "COLOR",
+  "value": "#1D2027"
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_ICON_COLOR",
+  "type": "COLOR",
+  "value": "#F2F3F4"
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_HANDLE_COLOR",
+  "type": "COLOR",
+  "value": "#686F78"
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_RADIUS",
+  "type": "INTEGER",
+  "value": 28
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_TITLE_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_HEADER_HEIGHT",
+  "type": "INTEGER",
+  "value": 48
+ },
+ {
+  "name": "APP_NATIVE_MESSAGE_DIALOG_BUTTON_RADIUS",
+  "type": "INTEGER",
+  "value": 20
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_RADIUS",
+  "type": "INTEGER",
+  "value": 28
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_TITLE_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_HEADER_HEIGHT",
+  "type": "INTEGER",
+  "value": 48
+ },
+ {
+  "name": "APP_NATIVE_HOTSPOT_DIALOG_BUTTON_RADIUS",
+  "type": "INTEGER",
+  "value": 20
+ },
+ {
+  "name": "APP_NATIVE_LOGGER_DIALOG_RADIUS",
+  "type": "INTEGER",
+  "value": 28
+ },
+ {
+  "name": "APP_NATIVE_LOGGER_DIALOG_TITLE_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_LOGGER_DIALOG_HEADER_HEIGHT",
+  "type": "INTEGER",
+  "value": 48
+ },
+ {
+  "name": "APP_NATIVE_LOGGER_DIALOG_BUTTON_RADIUS",
+  "type": "INTEGER",
+  "value": 20
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_RADIUS",
+  "type": "INTEGER",
+  "value": 28
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_HORIZONTAL_PADDING",
+  "type": "INTEGER",
+  "value": 14
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_BOTTOM_PADDING",
+  "type": "INTEGER",
+  "value": 12
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_TITLE_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_HEADER_HEIGHT",
+  "type": "INTEGER",
+  "value": 48
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_HANDLE_WIDTH",
+  "type": "INTEGER",
+  "value": 36
+ },
+ {
+  "name": "APP_NATIVE_CONFIG_SHEET_HANDLE_HEIGHT",
+  "type": "INTEGER",
+  "value": 4
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_RADIUS",
+  "type": "INTEGER",
+  "value": 28
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_HORIZONTAL_PADDING",
+  "type": "INTEGER",
+  "value": 14
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_BOTTOM_PADDING",
+  "type": "INTEGER",
+  "value": 12
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_TITLE_TEXT_SIZE",
+  "type": "INTEGER",
+  "value": 18
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_HEADER_HEIGHT",
+  "type": "INTEGER",
+  "value": 48
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_HANDLE_WIDTH",
+  "type": "INTEGER",
+  "value": 36
+ },
+ {
+  "name": "APP_NATIVE_DETAILS_SHEET_HANDLE_HEIGHT",
+  "type": "INTEGER",
+  "value": 4
+ }
+]

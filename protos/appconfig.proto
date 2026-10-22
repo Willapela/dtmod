@@ -1,0 +1,28 @@
+syntax = "proto3";
+package com.app.appConfig;
+
+message Empty {}
+
+message AppConfigItem {
+  string name = 1;
+  string type = 2;
+  oneof value {
+    string string_value = 3;
+    int64 int_value = 4;
+    bool bool_value = 5;
+    bytes bytes_value = 6;
+  }
+}
+
+message AppConfigReply {
+  repeated AppConfigItem data = 1;
+}
+
+message HashReply {
+  string hash = 1;
+}
+
+service AppConfigService {
+  rpc GetAppConfig(Empty) returns (AppConfigReply);
+  rpc getHash(Empty) returns (HashReply);
+}

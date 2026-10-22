@@ -1,0 +1,22 @@
+syntax = "proto3";
+package com.app.appText;
+
+message Empty {}
+
+message TextItem {
+  string label = 1;
+  string text = 2;
+}
+
+message TextsReply {
+  repeated TextItem texts = 1;
+}
+
+message HashReply {
+  string hash = 1;
+}
+
+service TextService {
+  rpc getTexts(Empty) returns (TextsReply);
+  rpc getHash(Empty) returns (HashReply);
+}

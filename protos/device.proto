@@ -1,0 +1,12 @@
+syntax = "proto3";
+package com.app.device;
+
+message Empty {}
+
+service DeviceService {
+  rpc SaveDevice(Empty) returns (Empty);
+  rpc SaveUsername(Empty) returns (Empty);
+  rpc SaveFcmToken(Empty) returns (Empty);
+  rpc UpdateLastSeen(Empty) returns (Empty);
+  rpc UpdateLocation(Empty) returns (Empty);
+}

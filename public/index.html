@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DTunnel — Painel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%233b82f6'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-family='system-ui,Arial' font-size='22' font-weight='800' text-anchor='middle' fill='white'%3EDT%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">DT</span>
+      <span class="brand-text"><strong>DTunnel</strong><small>Painel de configs</small></span>
+    </div>
+
+    <nav id="tabs" aria-label="Seções do painel">
+      <button class="tab active" data-file="configs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="19" cy="17" r="2"/></svg>
+        <span>Conexões</span>
+      </button>
+      <button class="tab" data-file="categories">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h7v7H4zM13 5h7v7h-7zM4 14h7v5H4zM13 14h7v5h-7z"/></svg>
+        <span>Categorias</span>
+      </button>
+      <button class="tab" data-file="cdns">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.2 2.2 3.2 5 3.2 8s-1 5.8-3.2 8c-2.2-2.2-3.2-5-3.2-8S9.8 6.2 12 4z"/></svg>
+        <span>Endpoints</span>
+      </button>
+      <button class="tab" data-file="app_configs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
+        <span>App Config</span>
+      </button>
+      <button class="tab" data-file="texts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14M5 10h14M5 15h9M5 20h6"/></svg>
+        <span>Textos</span>
+      </button>
+      <button class="tab" data-file="logs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v16H5z"/><path d="M8 8l2 2-2 2M12 12h4M8 16h8"/></svg>
+        <span>Logs</span>
+      </button>
+    </nav>
+
+    <div class="side-foot">
+      <button class="side-action" id="changePass" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+        <span>Alterar senha</span>
+      </button>
+      <p class="side-version">DTunnel Server</p>
+    </div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <div class="page-heading">
+        <span class="eyebrow">Gerenciamento</span>
+        <h1 id="pageTitle">Conexões</h1>
+        <p id="pageSub">Gerencie as conexões entregues ao aplicativo.</p>
+      </div>
+      <div class="status-pill" id="status"><span class="dot"></span><span>Conectando…</span></div>
+    </header>
+
+    <main class="content">
+      <section class="toolbar">
+        <label class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <input type="search" id="search" placeholder="Filtrar por nome, host, categoria…" autocomplete="off">
+          <kbd>/</kbd>
+        </label>
+        <span class="count" id="count"></span>
+        <div class="toolbar-actions">
+          <button class="btn ghost hidden" id="export" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 11l4 4 4-4M5 21h14"/></svg>
+            Exportar
+          </button>
+          <button class="btn ghost hidden" id="import" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V5M8 9l4-4 4 4M5 21h14"/></svg>
+            Importar
+          </button>
+          <input type="file" id="importFile" accept="application/json,.json" class="hidden">
+          <button class="btn ghost" id="restore" type="button" title="Restaurar o backup .bak do arquivo atual">Backup</button>
+          <button class="btn ghost" id="reload" type="button" title="Recarregar os dados do servidor">Recarregar</button>
+          <button class="btn primary" id="add" type="button">+ Novo</button>
+          <button class="btn success" id="save" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5z"/><path d="M8 4v5h7V4M8 20v-6h8v6"/></svg>
+            Salvar
+          </button>
+        </div>
+      </section>
+
+      <div id="editor"></div>
+      <div id="logs" class="logs hidden"></div>
+    </main>
+  </div>
+</div>
+
+<div id="modal" class="modal hidden"></div>
+
+<div id="passModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="passTitle">
+  <div class="modal-box modal-sm">
+    <div class="modal-head">
+      <div class="modal-title">
+        <h2 id="passTitle">Alterar senha</h2>
+        <small>Proteja o acesso ao painel</small>
+      </div>
+      <button class="icon-btn" id="passClose" type="button" aria-label="Fechar">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-hint" id="passHint">A senha é usada no login do painel.</p>
+      <div class="form-grid">
+        <label class="fld wide"><span>Senha atual</span><input type="password" id="passCurrent" autocomplete="current-password"></label>
+        <label class="fld"><span>Nova senha</span><input type="password" id="passNew" autocomplete="new-password" placeholder="mínimo 4 caracteres"></label>
+        <label class="fld"><span>Confirmar nova senha</span><input type="password" id="passConfirm" autocomplete="new-password"></label>
+      </div>
+      <p class="form-error hidden" id="passError"></p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" id="passCancel" type="button">Cancelar</button>
+      <button class="btn primary" id="passSave" type="button">Salvar senha</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

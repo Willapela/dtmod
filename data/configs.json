@@ -1,0 +1,47 @@
+[
+  {
+    "id": 900001,
+    "category": {
+      "name": "teste",
+      "color": "#1E90FFCC",
+      "sorter": 1
+    },
+    "name": "teste",
+    "description": "teste local",
+    "mode": "SSL_PROXY",
+    "tls_version": "TLSv1.2",
+    "sorter": 1,
+    "status": "ACTIVE",
+    "auth": {},
+    "config_payload": {
+      "payload": "GET / HTTP/1.1[lf]Host: [host][lf]Upgrade: websocket[lf][lf]",
+      "sni": "exemple.com"
+    },
+    "config_v2ray": null,
+    "dns_server": {
+      "dns1": "8.8.8.8",
+      "dns2": "8.8.4.4"
+    },
+    "icon": null,
+    "proxy": {
+      "host": "162.247.241.4",
+      "port": 443
+    },
+    "server": {
+      "host": "exemple.com",
+      "port": 443
+    },
+    "dt_protocol": "TCP",
+    "dt_port": "8000",
+    "hy_insecure": true,
+    "hy_port": "13375",
+    "hy_up_mbps": 100,
+    "hy_down_mbps": 150,
+    "hy_version": 1,
+    "udp_ports": [
+      7300
+    ],
+    "category_id": 74956,
+    "bhttp_config": null
+  }
+]
